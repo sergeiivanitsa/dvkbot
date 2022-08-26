@@ -1,12 +1,16 @@
-import requests
+import os
 
-PASSWORD = 'S7w973oiJ8TNbb1gp403V27gsUr61jT8'
-USER = 'andreykutenkikh@gmail.com'
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+USER = os.getenv('USER')
+PASSWORD = os.getenv('PASSWORD')
 
 URL = 'http://dvkeramik.ru/api/products?q='
 PREFIX = '&page=1&items_per_page=30'
 
-token='5795693615:AAHZGhvouRTcQh_JmC1SWdNBuh5y7QuyXrg'
 chat_id = 279293973
 
 session = requests.Session()
@@ -32,5 +36,7 @@ def take_availability(endpoint):
 
 
 def new_search(argument):
+    """Запускает функцию запроса к серверу с нужным URL
+       и возвращает ответ в виде словаря"""
     answer = take_availability(make_url(argument))
     return answer
